@@ -1,5 +1,8 @@
 name: Auto Assign Based on Module
 
+permissions:
+  issues: write
+
 on:
   issues:
     types: [opened]
