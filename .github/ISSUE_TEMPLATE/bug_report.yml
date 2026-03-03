@@ -1,0 +1,25 @@
+name: Bug Report
+description: Create a bug report
+title: "[BUG]: "
+labels: ["bug"]
+
+body:
+  - type: dropdown
+    id: module
+    attributes:
+      label: Module
+      description: Select the module where issue occurred
+      options:
+        - cardstack
+        - alumni
+        - es
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the issue
+    validations:
+      required: true
