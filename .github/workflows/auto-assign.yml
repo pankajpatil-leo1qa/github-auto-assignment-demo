@@ -1,0 +1,36 @@
+name: Auto Assign Based on Module
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign based on module
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueBody = context.payload.issue.body;
+
+            let assignees = [];
+
+            if (issueBody.includes("cardstack")) {
+              assignees = ["pankajpatil-leo1qa"];
+            } 
+            else if (issueBody.includes("alumni")) {
+              assignees = ["vamshifinancepeer"];
+            } 
+            else if (issueBody.includes("es")) {
+              assignees = ["pankajpatil-leo1qa", "vamshifinancepeer"];
+            }
+
+            if (assignees.length > 0) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: assignees
+              });
+            }
